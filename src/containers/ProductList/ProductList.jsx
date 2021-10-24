@@ -21,11 +21,11 @@ const ProductCard = ({ product }) => {
       <img
         src={product.image}
         alt={product.productName}
-        width="400"
-        height="300"
+        width="100%"
+        // height="300"
       />
-      <p>Size: {product.size}</p>
-      <p>Price: ${product.price}</p>
+      <h4>{product.productName}</h4>
+      <p>Size: {product.size[0]}</p>
       <p>Type: {product.productType}</p>
       <p>
         <Link to={`/products/${product.id}`}>Go to</Link>
@@ -68,8 +68,8 @@ const ProductList = () => {
         <Row xs={1} md={2} lg={3}>
           {products &&
             products.map((product, index) => (
-              <Col>
-                <ProductCard product={product} key={index} />
+              <Col key={index}>
+                <ProductCard product={product} key={product.id} />
               </Col>
             ))}
         </Row>
