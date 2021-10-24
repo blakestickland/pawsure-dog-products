@@ -4,6 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getProducts } from "../../services/products";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+
 
 // const useQuery = () => {
 //   const location = useLocation();
@@ -50,18 +55,21 @@ const ProductList = () => {
         }, []);
 
     return (
-      <div className={styles.ProductList}>
+      <Container className={styles.ProductList}>
+        {/* // <div className={styles.ProductList}> */}
         {/* {filteredProducts.map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))} */}
-        {products && 
-        products.map((product, index) => (
-            <ProductCard 
-                product={product}
-                key={index}
-            />
-        ))};
-      </div>
+            <ProductCard product={product} key={index} />
+          ))} */}
+        <Row xs={1} md={2} lg={3}>
+          {products &&
+            products.map((product, index) => (
+              <Col>
+                <ProductCard product={product} key={index} />
+              </Col>
+            ))}
+        </Row>
+        {/* // </div> */}
+      </Container>
     );
 };
 
