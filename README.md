@@ -1,6 +1,5 @@
 # Project: React Ecommerce
-## Create a React Ecommerce Application
-### Requirements:
+## MVP:
 
 2 pages:
 * Home Page

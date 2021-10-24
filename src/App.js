@@ -1,10 +1,31 @@
-import './App.css';
+import './App.scss';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import Header from './containers/Header';
+import Product from "./containers/Product";
+import ProductList from './containers/ProductList';
+import BootstrapCarousel from './components/BootstrapCarousel';
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>Pawsure</h1>
-      <h2>-- products for the perfect pooch --</h2>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/products/:id">
+            <Product />
+          </Route>
+          <Route path="/products">
+            <ProductList />
+          </Route>
+          <Route>
+            <h1>This is the home page.</h1>
+            <BootstrapCarousel />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
