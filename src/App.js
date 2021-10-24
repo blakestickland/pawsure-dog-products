@@ -3,7 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from './containers/Header';
 import Product from "./containers/Product";
-import ProductList from './containers/ProductList/ProductList';
+import ProductList from './containers/ProductList';
+import BootstrapCarousel from './components/BootstrapCarousel';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -21,6 +22,7 @@ function App() {
           </Route>
           <Route>
             <h1>This is the home page.</h1>
+            <BootstrapCarousel />
           </Route>
         </Switch>
       </Router>

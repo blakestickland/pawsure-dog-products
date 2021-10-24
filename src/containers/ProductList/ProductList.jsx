@@ -18,10 +18,15 @@ import Col from "react-bootstrap/Col";
 const ProductCard = ({ product }) => {
   return (
     <div className={styles.ProductCard}>
-      <p>ID: {product.id}</p>
-      <p>
-        Name: {product.productName}
-      </p>
+      <img
+        src={product.image}
+        alt={product.productName}
+        width="400"
+        height="300"
+      />
+      <p>Size: {product.size}</p>
+      <p>Price: ${product.price}</p>
+      <p>Type: {product.productType}</p>
       <p>
         <Link to={`/products/${product.id}`}>Go to</Link>
       </p>
