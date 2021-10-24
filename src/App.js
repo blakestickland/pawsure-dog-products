@@ -1,4 +1,5 @@
-import './App.css';
+import './App.scss';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from './containers/Header';
 import Product from "./containers/Product";
