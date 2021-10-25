@@ -21,7 +21,7 @@ const BootstrapCarousel = ({ product }) => {
     <Carousel className={styles}>
         {products &&
             products.map((product, index) => (
-            <Carousel.Item interval={1500} key={index}>
+            <Carousel.Item interval={2500} key={index}>
                 <img
                 className="d-block w-100"
                 src={product.image}

@@ -1,0 +1,13 @@
+.Nav {
+    display: flex;
+
+    &__ul {
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    &__Form {
+        display: flex;
+        flex-direction: row;
+    }
+}
