@@ -28,11 +28,9 @@ const Navigation = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link to="/">Home</Nav.Link>
-              <Nav.Link href="/about-us">Contact Us</Nav.Link>
-              <Nav.Link href="/contact-us">About Us</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Products" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Dog treats</NavDropdown.Item>
+                <NavDropdown.Item href="/products">Dog treats</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Dog cookies
                 </NavDropdown.Item>
@@ -41,8 +39,10 @@ const Navigation = () => {
                   Featured Items
                 </NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link href="/about-us">Contact Us</Nav.Link>
+              <Nav.Link href="/contact-us">About Us</Nav.Link>
             </Nav>
-            <Form inline className={styles.Nav__Form}>
+            <Form className={styles.Nav__Form}>
               <FormControl
                 type="text"
                 placeholder="Search"
