@@ -72,7 +72,7 @@ const ProductList = ({ products, cartItems, onAdd, onRemove }) => {
                 </Col>
               ))}
           </Row>
-          <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+          {/* <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
         </div>
       </Container>
     );
