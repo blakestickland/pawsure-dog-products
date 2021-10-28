@@ -1,16 +1,18 @@
-import styles from "./Product.module.scss";
+import style from "./Product.module.scss";
 import { useParams } from "react-router"; // This might be "react-router-dom"
 import { findProduct } from "../../services/products";
+import Cart from "../../components/Cart";
 import { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
-
-const Product = () => {
+const Product = ({ cartItems, onAdd, onRemove }) => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
-    const [size, setSize] = useState("small");
+    const [sizeState, setSizeState] = useState("small");
     const [priceState, setPriceState] = useState(10);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     // const product = products.find((product) => {
     //     return product.id === parseInt(id);
@@ -20,65 +22,92 @@ const Product = () => {
         const populateProduct = async () => {
             const data = await findProduct(id);
             setProduct(data);
+            setSelectedProduct(data);
         };
         populateProduct();
     }, [id])
     
-    useEffect(() => {
-      if (product) {
-        console.log(product.price);
-        switch (size) {
-          case product.size[0]:
-            setPriceState(product.price[0]);
-            break;
+  useEffect(() => {
+    if (selectedProduct) {
+      switch (sizeState) {
+        case product.size[0]:
+          setPriceState(product.price[0]);
+          setSelectedProduct({
+            ...selectedProduct,
+            size: sizeState,
+            price: product.price[0],
+          });
+          break;
           case product.size[1]:
             setPriceState(product.price[1]);
+            setSelectedProduct({
+              ...selectedProduct,
+              size: sizeState,
+              price: product.price[1],
+            });
             break;
-          case product.size[2]:
-            setPriceState(product.price[2]);
-            break;
+            case product.size[2]:
+              setPriceState(product.price[2]);
+              setSelectedProduct({
+                ...selectedProduct,
+                size: sizeState,
+                price: product.price[2],
+              });
+          break;
 
-          default:
-            break;
-        }
+        default: 
+          break;
       }
-    }, [size, product]);
-
-    if (!product) {
-        return <h2>Product with Id: { id } not found.</h2>
     }
+  }, [sizeState, product]);      
+  
+  if (!product) {
+      return <h2>Product with Id: { id } not found.</h2>
+  };
 
-    const handleSizeSelection = (event) => {
-      event.preventDefault();
-      setSize(event.target.value);
-    }
+  const handleSizeStateSelection = (event) => {
+    event.preventDefault();
+    setSizeState(event.target.value);
+  };
 
   return (
-    <Container className={styles}>
-      <h2>
-        {product.productName} [{product.productType}]
-      </h2>
-      <img
-        src={product.image}
-        alt={product.productName}
-        width="400"
-        height="300"
-      />
-      <p>Size: {product.size[0]}</p>
-      <Form.Select
-        aria-label="Select size of product"
-        onChange={handleSizeSelection}
-      >
-        {product.size &&
-          product.size.map((size, index) => (
-            <option value={size} key={index}>
-              {size}
-            </option>
-          ))}
-      </Form.Select>
-      <p>Price: ${priceState}</p>
-      <p>Type: {product.productType}</p>
-    </Container>
+    <>
+      <Container className={style.Product}>
+        <h2>
+          {product.productName} [{product.productType}]
+        </h2>
+        <img
+          src={product.image}
+          alt={product.productName}
+          width="100%"
+          height="300px"
+        />
+        <p>size: {sizeState}</p>
+        <div className={style.Product__selector}>
+          <Form.Select
+            aria-label="Select size of product"
+            onChange={handleSizeStateSelection}
+          >
+            {product.size &&
+              product.size.map((size, index) => (
+                <option value={size} key={index}>
+                  {size}
+                </option>
+              ))}
+          </Form.Select>
+        </div>
+        <p>Price: ${priceState}</p>
+        <p>Type: {product.productType}</p>
+        <div className="d-grid gap-2">
+          <Button variant="primary" size="md" onClick={() => onAdd(selectedProduct)}>
+            Add To Cart
+          </Button>
+        </div>
+      </Container>
+      <Container>
+        <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+      </Container>
+    </>
   );
 };
 

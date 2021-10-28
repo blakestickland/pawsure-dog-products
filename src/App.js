@@ -2,32 +2,83 @@ import './App.scss';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from './containers/Header';
-import Product from "./containers/Product";
+import Home from './containers/Home';
 import ProductList from './containers/ProductList';
-import BootstrapCarousel from './components/BootstrapCarousel';
+import Product from "./containers/Product";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getProducts } from "./services/products";
+
 
 function App() {
+  // When page is loaded, retrieve the Products from Firestore
+  // Store the data in the state "products"
+  // Pass the state down the tree for use
+
+  const [products, setProducts] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  
+  const populateProducts = async () => {
+    const data = await getProducts();
+    setProducts(data);
+    console.log("populateProducts data, called in App.js: ", data);
+  };
+
+  useEffect(() => {
+    populateProducts();
+  }, []);
+
+  const onAdd = (product) => {
+    const exist = cartItems.find(x => x.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map(x => 
+        x.id === product.id 
+        ? {...exist, qty: exist.qty + 1 } 
+        : x ));
+    } else {
+      setCartItems([...cartItems, {...product, qty: 1 }])
+    }
+  }
+
+  const onRemove = ( product ) => {
+    const exist = cartItems.find(x => x.id === product.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter(x => x.id !== product.id))
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  }
+
+  
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header countCartItems={cartItems.length}/>
         <Switch>
           <Route path="/products/:id">
-            <Product />
+            <Product cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
           </Route>
           <Route path="/products">
-            <ProductList />
+            <ProductList
+              products={products}
+              cartItems={cartItems}
+              onAdd={onAdd}
+              onRemove={onRemove}
+            />
           </Route>
-          <Route>
-            <h1>This is the home page.</h1>
-            <BootstrapCarousel />
+          <Route path="/">
+            <Home products={products} />
           </Route>
         </Switch>
       </Router>
     </div>
   );
-}
+};
 
 export default App;
