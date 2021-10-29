@@ -22,7 +22,7 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
         const populateProduct = async () => {
             const data = await findProduct(id);
             setProduct(data);
-            setSelectedProduct(data);
+            setSelectedProduct({...data, size: data.size[0], price: data.price[0]});
         };
         populateProduct();
     }, [id])
