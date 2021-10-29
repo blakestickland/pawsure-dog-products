@@ -15,32 +15,42 @@ const Navigation = () => {
       <nav className={styles.Nav}>
         {/* <ul className={styles.Nav__ul}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className={styles.Link}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/products">Products</Link>
+            <Link to="/products" className={styles.Link}>
+              Products
+            </Link>
+          </li>
+          <li>
+            <Link to="/favorites" className={styles.Link}>
+              Favorites
+            </Link>
           </li>
         </ul> */}
-        <Navbar expand="lg" sticky="top">
-          <Navbar.Brand href="#home">
-              Pawsure
-          </Navbar.Brand>
+        <Navbar expand="lg" sticky="top" className={styles.Navbar}>
+          <Link to="/" className={styles.Link}>
+            <Navbar.Brand>Pawsure</Navbar.Brand>
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Products" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/products">Dog treats</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Dog cookies
+                <NavDropdown.Item>
+                  <Link to="/products" className={styles.Link}>
+                    Dog treats
+                  </Link>
                 </NavDropdown.Item>
+
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Featured Items
-                </NavDropdown.Item>
+                  <Link to="/favorites" className={styles.Link}>
+                <NavDropdown.Item>Favorite Items</NavDropdown.Item>
+                  </Link>
               </NavDropdown>
-              <Nav.Link href="/about-us">Contact Us</Nav.Link>
-              <Nav.Link href="/contact-us">About Us</Nav.Link>
+              <Nav.Link>Contact Us</Nav.Link>
+              <Nav.Link>About Us</Nav.Link>
             </Nav>
             <Form className={styles.Nav__Form}>
               <FormControl

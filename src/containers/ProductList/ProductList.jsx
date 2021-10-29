@@ -7,8 +7,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import ToggleButton from "react-bootstrap/ToggleButton";
 
 import Cart from "../../components/Cart";
+
+import { updateProduct } from "../../services/products";
 
 
 // const useQuery = () => {
@@ -16,13 +19,38 @@ import Cart from "../../components/Cart";
 //   return new URLSearchParams(location.search);
 // };
 
-const ProductCard = ({ product, onAdd }) => {
+const ProductCard = ({ product, onAdd, populateProducts }) => {
+  
+  // Toggle Favorite
+  const toggleFavorite = async (product) => {
+    const partial = {
+      favorite: !product.favorite,
+    };
+    await updateProduct(product.id, partial);
+    populateProducts();
+  };
+
+
   return (
     <div className={styles.ProductCard}>
-      <img src={product.image} alt={product.productName} width="100%" />
+      <img
+        src={product.image}
+        alt={product.productName}
+        width="100%"
+      />
       <h4>{product.productName}</h4>
       <p>Size: {product.size[0]}</p>
       <p>Price: ${product.price[0]}</p>
+      <ToggleButton
+        className="mb-2"
+        id="toggle-check"
+        type="checkbox"
+        variant="outline-success"
+        checked={product.favorite}
+        onClick={() => toggleFavorite(product)}
+      >
+        Favorite
+      </ToggleButton>
       <p>
         <Link to={`/products/${product.id}`}>More details...</Link>
       </p>
@@ -35,7 +63,7 @@ const ProductCard = ({ product, onAdd }) => {
   );
 };
 
-const ProductList = ({ products, cartItems, onAdd, onRemove }) => {
+const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, populateProducts }) => {
     
     // const query = useQuery();
     // const name = query.get("name") ?? "";
@@ -65,9 +93,12 @@ const ProductList = ({ products, cartItems, onAdd, onRemove }) => {
               products.map((product, index) => (
                 <Col key={index}>
                   <ProductCard
+                    className={styles.ProductCard}
                     product={product}
                     key={product.id}
                     onAdd={onAdd}
+                    toggleFavorite={toggleFavorite}
+                    populateProducts={populateProducts}
                   />
                 </Col>
               ))}

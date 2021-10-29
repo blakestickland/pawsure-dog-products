@@ -4,8 +4,11 @@
     justify-content: space-between;
     background-color: #FFFD66;
     padding: 10px 20px;
-}
 
-.Header img {
-    width: 7rem;
+    &__img {
+        width: 100px;
+    }
+    &__cartDiv {
+        width: 100px;
+    }
 }

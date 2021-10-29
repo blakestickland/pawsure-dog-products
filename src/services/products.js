@@ -36,3 +36,10 @@ export const findProduct = async (id) => {
   // T -> Custom Object
   return cleanRecord(docSnap);
 };
+
+// UPDATE of CRUD
+export const updateProduct = async (id, partial) => {
+    const colRef = firestore.collection("products");
+    const docRef = colRef.doc(id);
+    await docRef.update(partial);
+}
