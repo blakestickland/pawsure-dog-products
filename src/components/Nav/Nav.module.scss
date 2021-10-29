@@ -1,7 +1,21 @@
 .Nav {
-
-    &__Form {
+    // width: 300px;
+    &__ul {
         display: flex;
         flex-direction: row;
+        flex-wrap: nowrap;
+        list-style-type: none;
+        justify-content: space-between;
     }
+}
+
+.Link {
+    text-decoration: none;
+    color: black;
+}
+
+.Navbar {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
