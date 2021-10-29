@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import Card from "react-bootstrap/Card";
 
 import Cart from "../../components/Cart";
 
@@ -32,34 +33,68 @@ const ProductCard = ({ product, onAdd, populateProducts }) => {
 
 
   return (
-    <div className={styles.ProductCard}>
-      <img
-        src={product.image}
-        alt={product.productName}
-        width="100%"
-      />
-      <h4>{product.productName}</h4>
-      <p>Size: {product.size[0]}</p>
-      <p>Price: ${product.price[0]}</p>
-      <ToggleButton
-        className="mb-2"
-        id="toggle-check"
-        type="checkbox"
-        variant="outline-success"
+    <Card className="text-center" style={{ width: "18rem" }}>
+      {/* <Card.Header>Featured</Card.Header> */}
+      <Card.Img variant="top" src={product.image}  style={{ height: "12rem" }} />
+      <Card.Body>
+        <Card.Title>{product.productName}</Card.Title>
+        <Card.Text>Size: {product.size[0]}</Card.Text>
+        <Card.Text>Price: ${product.price[0].toFixed(2)}</Card.Text>
+        {/* <Button 
+        variant="primary" 
         checked={product.favorite}
         onClick={() => toggleFavorite(product)}
-      >
-        Favorite
-      </ToggleButton>
-      <p>
-        <Link to={`/products/${product.id}`}>More details...</Link>
-      </p>
-      <div className="d-grid gap-2">
+        >
+        {product.favorite ? "Favorited" : "Add to Favorites"}
+      </Button> */}
+        <ToggleButton
+          className="mb-2"
+          // id="toggle-check"
+          type="checkbox"
+          variant="outline-success"
+          checked={product.favorite}
+          onClick={() => toggleFavorite(product)}
+        >
+          {product.favorite ? "Favorited" : "Add to Favorites"}
+          {/* Favorite */}
+        </ToggleButton>
+        <Card.Text>
+          <Link to={`/products/${product.id}`} style={{ fontWeight: "bold" }}>More details ></Link>
+        </Card.Text>
         <Button variant="primary" size="md" onClick={() => onAdd(product)}>
           Add To Cart
         </Button>
-      </div>
-    </div>
+      </Card.Body>
+      {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
+    </Card>
+    // <div className={styles.ProductCard}>
+    //   <img
+    //     src={product.image}
+    //     alt={product.productName}
+    //     width="100%"
+    //   />
+    //   <h4>{product.productName}</h4>
+    //   <p>Size: {product.size[0]}</p>
+    //   <p>Price: ${product.price[0]}</p>
+    //   <ToggleButton
+    //     className="mb-2"
+    //     // id="toggle-check"
+    //     type="checkbox"
+    //     variant="outline-success"
+    //     checked={product.favorite}
+    //     onClick={() => toggleFavorite(product)}
+    //   >{product.favorite ? "Favorited" : "Add to Favorites"}
+    //     {/* Favorite */}
+    //   </ToggleButton>
+    //   <p>
+    //     <Link to={`/products/${product.id}`}>More details...</Link>
+    //   </p>
+    //   <div className="d-grid gap-2">
+    //     <Button variant="primary" size="md" onClick={() => onAdd(product)}>
+    //       Add To Cart
+    //     </Button>
+    //   </div>
+    // </div>
   );
 };
 
