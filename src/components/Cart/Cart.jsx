@@ -26,7 +26,7 @@ const Cart = ({ cartItems, onAdd, onRemove }) => {
                         </button>
                     </div>
                     <div>
-                        {item.qty} x ${item.price}
+                        {item.qty} x ${item.price.toFixed(2)}
                     </div>
                 </div>
             ))}
