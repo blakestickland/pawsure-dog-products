@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.scss";
+import SearchBar from "../SearchBar";
   import {
     Navbar,
     Nav,
@@ -13,23 +14,6 @@ import styles from "./Nav.module.scss";
 const Navigation = () => {
     return (
       <nav className={styles.Nav}>
-        {/* <ul className={styles.Nav__ul}>
-          <li>
-            <Link to="/" className={styles.Link}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/products" className={styles.Link}>
-              Products
-            </Link>
-          </li>
-          <li>
-            <Link to="/favorites" className={styles.Link}>
-              Favorites
-            </Link>
-          </li>
-        </ul> */}
         <Navbar expand="lg" sticky="top" className={styles.Navbar}>
           <Link to="/" className={styles.Link}>
             <Navbar.Brand>Pawsure</Navbar.Brand>
@@ -52,14 +36,15 @@ const Navigation = () => {
               <Nav.Link>Contact Us</Nav.Link>
               <Nav.Link>About Us</Nav.Link>
             </Nav>
-            <Form className={styles.Nav__Form}>
+            {/* <Form className={styles.Nav__Form}>
               <FormControl
                 type="text"
                 placeholder="Search"
                 className="mr-sm-2"
               />
               <Button variant="outline-success">Search</Button>
-            </Form>
+            </Form> */}
+            <SearchBar />
           </Navbar.Collapse>
         </Navbar>
       </nav>

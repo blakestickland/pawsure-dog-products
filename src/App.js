@@ -10,6 +10,7 @@ import Favorites from './containers/Favorites';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getProducts, updateProduct } from "./services/products";
+import SearchProvider from './context/SearchContext';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   // Store the data in the state "products"
   // Pass the state down the tree for use
 
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
   const populateProducts = async () => {
@@ -68,32 +69,34 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header countCartItems={cartItems.length} />
-        <Switch>
-          <Route path="/featured">
-            <Favorites />
-          </Route>
-          <Route path="/products/:id">
-            <Product
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-              toggleFavorite={toggleFavorite}
-            />
-          </Route>
-          <Route path="/products">
-            <ProductList
-              products={products}
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-              toggleFavorite={toggleFavorite}
-            />
-          </Route>
-          <Route path="/">
-            <Home products={products} />
-          </Route>
-        </Switch>
+        <SearchProvider>
+          <Header countCartItems={cartItems.length} />
+          <Switch>
+            <Route path="/featured">
+              <Favorites />
+            </Route>
+            <Route path="/products/:id">
+              <Product
+                cartItems={cartItems}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                toggleFavorite={toggleFavorite}
+              />
+            </Route>
+            <Route path="/products">
+              <ProductList
+                products={products}
+                cartItems={cartItems}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                toggleFavorite={toggleFavorite}
+              />
+            </Route>
+            <Route path="/">
+              <Home products={products} />
+            </Route>
+          </Switch>
+        </SearchProvider>
       </Router>
     </div>
   );

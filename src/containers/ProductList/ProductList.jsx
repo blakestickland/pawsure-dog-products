@@ -11,8 +11,8 @@ import Card from "react-bootstrap/Card";
 
 import Cart from "../../components/Cart";
 
-import { updateProduct } from "../../services/products";
-
+import { useContext } from "react";
+import { SearchContext } from "../../context/SearchContext";
 
 // const useQuery = () => {
 //   const location = useLocation();
@@ -53,6 +53,11 @@ const ProductCard = ({ product, onAdd, toggleFavorite }) => {
 };
 
 const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, populateProducts }) => {
+  const { search } = useContext(SearchContext);
+
+  const searchResults = products.filter(product => 
+      product.productName.includes(search) 
+    );
     
     // const query = useQuery();
     // const name = query.get("name") ?? "";
@@ -78,8 +83,8 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
             <ProductCard product={product} key={index} />
           ))} */}
           <Row xs={1} md={2} lg={3} className="mb-4">
-            {products &&
-              products.map((product, index) => (
+            {searchResults &&
+              searchResults.map((product, index) => (
                 <Col key={index} className="d-flex justify-content-around">
                   <ProductCard
                     product={product}
