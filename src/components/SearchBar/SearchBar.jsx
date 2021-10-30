@@ -1,6 +1,7 @@
 import styles from "./Searchbar.module.scss";
 import { useState, useContext } from "react";
 import { SearchContext } from "../../context/SearchContext.jsx";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
     const [currentInput, setCurrentInput] = useState("");
@@ -61,13 +62,15 @@ const SearchBar = () => {
             value={currentInput}
             onChange={handleChange}
             />
-            <button
-            className="btn btn-outline-info my-2 my-sm-0"
-            type="submit"
-            onClick={handleClick}
-            >
-                <i className="fas fa-search"></i>
-            </button>
+                <button
+                className="btn btn-outline-info my-2 my-sm-0"
+                type="submit"
+                onClick={handleClick}
+                >
+                <Link to="/products">
+                    <i className="fas fa-search"></i>
+                </Link>
+                </button>
         </form>
       </div>
     );

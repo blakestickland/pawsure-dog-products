@@ -36,7 +36,7 @@ const ProductCard = ({ product, onAdd, toggleFavorite }) => {
           className="mb-2"
           // id="toggle-check"
           type="checkbox"
-          variant="outline-success"
+          variant="outline-info"
           checked={product.favorite}
           onClick={() => toggleFavorite(product)}
         >

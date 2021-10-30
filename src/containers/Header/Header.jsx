@@ -19,7 +19,7 @@ const Header = ({ countCartItems }) => {
             <Navigation />
           </div>
           <div className={styles.Header__cartDiv}>
-            <i class="fas fa-shopping-cart"></i>{" "}
+            <i class="fas fa-shopping-cart fa-lg text-info"></i>{" "}
             {countCartItems ? (
               <button className="badge">{countCartItems}</button>
             ) : (
