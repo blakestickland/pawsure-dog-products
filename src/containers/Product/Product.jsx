@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
+import ToggleButton from "react-bootstrap/ToggleButton";
 
-const Product = ({ cartItems, onAdd, onRemove }) => {
+const Product = ({ cartItems, onAdd, onRemove, toggleFavorite }) => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [sizeState, setSizeState] = useState("small");
@@ -72,6 +74,44 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
 
   return (
     <>
+      <Card
+        className="text-center mb-3 rounded shadow-sm"
+        style={{ width: "18rem" }}
+      >
+        {/* <Card.Header>Featured</Card.Header> */}
+        <Card.Img
+          variant="top"
+          src={product.image}
+          // style={{ height: "12rem" }}
+        />
+        <Card.Body>
+          <Card.Title>{product.productName}</Card.Title>
+          <Card.Text>Size: {product.size[0]}</Card.Text>
+          <Card.Text>Price: ${product.price[0].toFixed(2)}</Card.Text>
+          <Card.Text>
+          </Card.Text>
+          <ToggleButton
+            className="mb-2"
+            // id="toggle-check"
+            type="checkbox"
+            variant="outline-success"
+            checked={product.favorite}
+            onClick={() => toggleFavorite(product)}
+          >
+            {product.favorite ? "Favorited" : "Add to Favorites"}
+            {/* Favorite */}
+          </ToggleButton>
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => onAdd(product)}
+            className="w-100"
+          >
+            Add To Cart
+          </Button>
+        </Card.Body>
+        {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
+      </Card>
       <Container className={style.Product}>
         <h2>
           {product.productName} [{product.productType}]
@@ -99,7 +139,11 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
         <p>Price: ${priceState}</p>
         <p>Type: {product.productType}</p>
         <div className="d-grid gap-2">
-          <Button variant="primary" size="md" onClick={() => onAdd(selectedProduct)}>
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => onAdd(selectedProduct)}
+          >
             Add To Cart
           </Button>
         </div>
