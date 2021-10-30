@@ -74,7 +74,12 @@ function App() {
             <Favorites />
           </Route>
           <Route path="/products/:id">
-            <Product cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+            <Product
+              cartItems={cartItems}
+              onAdd={onAdd}
+              onRemove={onRemove}
+              toggleFavorite={toggleFavorite}
+            />
           </Route>
           <Route path="/products">
             <ProductList
@@ -83,7 +88,6 @@ function App() {
               onAdd={onAdd}
               onRemove={onRemove}
               toggleFavorite={toggleFavorite}
-              populateProducts={populateProducts}
             />
           </Route>
           <Route path="/">

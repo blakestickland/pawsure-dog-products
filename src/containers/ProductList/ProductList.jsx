@@ -1,5 +1,4 @@
 import styles from "./ProductList.module.scss";
-// import products from "../../services/products";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -8,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import Card from "react-bootstrap/Card";
 
 import Cart from "../../components/Cart";
 
@@ -19,47 +19,36 @@ import { updateProduct } from "../../services/products";
 //   return new URLSearchParams(location.search);
 // };
 
-const ProductCard = ({ product, onAdd, populateProducts }) => {
-  
-  // Toggle Favorite
-  const toggleFavorite = async (product) => {
-    const partial = {
-      favorite: !product.favorite,
-    };
-    await updateProduct(product.id, partial);
-    populateProducts();
-  };
-
+const ProductCard = ({ product, onAdd, toggleFavorite }) => {
 
   return (
-    <div className={styles.ProductCard}>
-      <img
-        src={product.image}
-        alt={product.productName}
-        width="100%"
-      />
-      <h4>{product.productName}</h4>
-      <p>Size: {product.size[0]}</p>
-      <p>Price: ${product.price[0]}</p>
-      <ToggleButton
-        className="mb-2"
-        id="toggle-check"
-        type="checkbox"
-        variant="outline-success"
-        checked={product.favorite}
-        onClick={() => toggleFavorite(product)}
-      >
-        Favorite
-      </ToggleButton>
-      <p>
-        <Link to={`/products/${product.id}`}>More details...</Link>
-      </p>
-      <div className="d-grid gap-2">
-        <Button variant="primary" size="md" onClick={() => onAdd(product)}>
+    <Card className="text-center mb-3 rounded shadow-sm" style={{ width: "18rem" }}>
+      {/* <Card.Header>Featured</Card.Header> */}
+      <Card.Img variant="top" src={product.image}  style={{ height: "12rem" }} />
+      <Card.Body>
+        <Card.Title>{product.productName}</Card.Title>
+        <Card.Text>Size: {product.size[0]}</Card.Text>
+        <Card.Text>Price: ${product.price[0].toFixed(2)}</Card.Text>
+        <Card.Text>
+          <Link to={`/products/${product.id}`} style={{  textDecoration: "none" }}>More details &gt;</Link>
+        </Card.Text>
+        <ToggleButton
+          className="mb-2"
+          // id="toggle-check"
+          type="checkbox"
+          variant="outline-success"
+          checked={product.favorite}
+          onClick={() => toggleFavorite(product)}
+        >
+          {product.favorite ? "Favorited" : "Add to Favorites"}
+          {/* Favorite */}
+        </ToggleButton>
+        <Button variant="primary" size="md" onClick={() => onAdd(product)} className="w-100">
           Add To Cart
         </Button>
-      </div>
-    </div>
+      </Card.Body>
+      {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
+    </Card>
   );
 };
 
@@ -88,12 +77,11 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
           {/* {filteredProducts.map((product, index) => (
             <ProductCard product={product} key={index} />
           ))} */}
-          <Row xs={1} md={2} lg={3}>
+          <Row xs={1} md={2} lg={3} className="mb-4">
             {products &&
               products.map((product, index) => (
-                <Col key={index}>
+                <Col key={index} className="d-flex justify-content-around">
                   <ProductCard
-                    className={styles.ProductCard}
                     product={product}
                     key={product.id}
                     onAdd={onAdd}
