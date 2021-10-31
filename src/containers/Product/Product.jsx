@@ -1,108 +1,140 @@
 import style from "./Product.module.scss";
 import { useParams } from "react-router"; // This might be "react-router-dom"
-import { findProduct } from "../../services/products";
+import { findProduct, updateProduct } from "../../services/products";
 import Cart from "../../components/Cart";
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import { Row, Col } from "react-bootstrap";
 
 const Product = ({ cartItems, onAdd, onRemove }) => {
-    const { id } = useParams();
-    const [product, setProduct] = useState(null);
-    const [sizeState, setSizeState] = useState("small");
-    const [priceState, setPriceState] = useState(10);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [sizeState, setSizeState] = useState("small");
+  const [priceState, setPriceState] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-    // const product = products.find((product) => {
-    //     return product.id === parseInt(id);
-    // })
+  // const product = products.find((product) => {
+  //     return product.id === parseInt(id);
+  // })
+  const populateProduct = async () => {
+    const data = await findProduct(id);
+    setProduct(data);
+    setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
+    setPriceState(data.price[0].toFixed(2));
+  };
 
-    useEffect(() => {
-        const populateProduct = async () => {
-            const data = await findProduct(id);
-            setProduct(data);
-            setSelectedProduct({...data, size: data.size[0], price: data.price[0]});
-        };
-        populateProduct();
-    }, [id])
-    
+  useEffect(() => {
+    populateProduct();
+  }, [id]);
+
   useEffect(() => {
     if (selectedProduct) {
       switch (sizeState) {
         case product.size[0]:
-          setPriceState(product.price[0]);
+          setPriceState(product.price[0].toFixed(2));
           setSelectedProduct({
             ...selectedProduct,
             size: sizeState,
             price: product.price[0],
           });
           break;
-          case product.size[1]:
-            setPriceState(product.price[1]);
-            setSelectedProduct({
-              ...selectedProduct,
-              size: sizeState,
-              price: product.price[1],
-            });
-            break;
-            case product.size[2]:
-              setPriceState(product.price[2]);
-              setSelectedProduct({
-                ...selectedProduct,
-                size: sizeState,
-                price: product.price[2],
-              });
+        case product.size[1]:
+          setPriceState(product.price[1].toFixed(2));
+          setSelectedProduct({
+            ...selectedProduct,
+            size: sizeState,
+            price: product.price[1],
+          });
+          break;
+        case product.size[2]:
+          setPriceState(product.price[2].toFixed(2));
+          setSelectedProduct({
+            ...selectedProduct,
+            size: sizeState,
+            price: product.price[2],
+          });
           break;
 
-        default: 
+        default:
           break;
       }
     }
-  }, [sizeState, product]);      
-  
+  }, [sizeState, product]);
+
   if (!product) {
-      return <h2>Product with Id: { id } not found.</h2>
-  };
+    return <h2>Product with Id: {id} not found.</h2>;
+  }
 
   const handleSizeStateSelection = (event) => {
     event.preventDefault();
     setSizeState(event.target.value);
   };
 
+  // Toggle Favorite
+  const toggleFavorite = async (product) => {
+    const partial = {
+      favorite: !product.favorite,
+    };
+    await updateProduct(product.id, partial);
+    populateProduct();
+  };
+
   return (
     <>
       <Container className={style.Product}>
-        <h2>
-          {product.productName} [{product.productType}]
-        </h2>
         <img
           src={product.image}
           alt={product.productName}
           width="100%"
           height="300px"
+          className={style.Product__img}
         />
-        <p>size: {sizeState}</p>
-        <div className={style.Product__selector}>
-          <Form.Select
-            aria-label="Select size of product"
-            onChange={handleSizeStateSelection}
-          >
-            {product.size &&
-              product.size.map((size, index) => (
-                <option value={size} key={index}>
-                  {size}
-                </option>
-              ))}
-          </Form.Select>
+        <h2>{product.productName}</h2>
+        <div>
+          <Row className="mb-2">
+            <Col className="d-flex justify-content-center">
+              <Form.Label column sm="2" className="px-3">
+                Size:
+              </Form.Label>
+              <div className={style.Product__selector}>
+                <Form.Select
+                  aria-label="Select size of product"
+                  onChange={handleSizeStateSelection}
+                >
+                  {product.size &&
+                    product.size.map((size, index) => (
+                      <option value={size} key={index}>
+                        {size}
+                      </option>
+                    ))}
+                </Form.Select>
+              </div>
+            </Col>
+          </Row>
         </div>
         <p>Price: ${priceState}</p>
         <p>Type: {product.productType}</p>
-        <div className="d-grid gap-2">
-          <Button variant="primary" size="md" onClick={() => onAdd(selectedProduct)}>
-            Add To Cart
-          </Button>
-        </div>
+        <p>Stock Amount: {product.stock}</p>
+        <ToggleButton
+          className="mb-2"
+          // id="toggle-check"
+          type="checkbox"
+          variant="outline-success"
+          checked={product.favorite}
+          onClick={() => toggleFavorite(product)}
+        >
+          {product.favorite ? "Favorited" : "Add to Favorites"}
+        </ToggleButton>
+        <Button
+          variant="primary"
+          size="md"
+          onClick={() => onAdd(selectedProduct)}
+        >
+          Add To Cart
+        </Button>
       </Container>
       <Container>
         <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
