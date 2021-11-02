@@ -36,14 +36,6 @@ const Navigation = () => {
               <Nav.Link>Contact Us</Nav.Link>
               <Nav.Link>About Us</Nav.Link>
             </Nav>
-            {/* <Form className={styles.Nav__Form}>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form> */}
             <SearchBar />
           </Navbar.Collapse>
         </Navbar>
