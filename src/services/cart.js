@@ -40,8 +40,8 @@ export const updateCartItem = async (id, partial) => {
     await docRef.update(partial);
 }
 // DELETE of CRUD
-export const deleteCartItem = async (id, partial) => {
+export const deleteCartItem = async (id) => {
     const colRef = firestore.collection("cartItems");
     const docRef = colRef.doc(id);
-    await docRef.delete(partial);
+    await docRef.delete();
 }
