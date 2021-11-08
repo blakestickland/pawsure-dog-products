@@ -1,11 +1,11 @@
 import styles from "./Searchbar.module.scss";
 import { useState, useContext } from "react";
-import { SearchContext } from "../../context/SearchContext.jsx";
+import { Context } from "../../context/Context.jsx";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {
     const [currentInput, setCurrentInput] = useState("");
-    const { setSearch } = useContext(SearchContext);
+    const { setSearch } = useContext(Context);
     
     const handleChange = (event) => {
         setCurrentInput(event.target.value);

@@ -10,7 +10,8 @@ import Favorites from './containers/Favorites';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getProducts, updateProduct } from "./services/products";
-import SearchProvider from './context/SearchContext';
+import Provider from './context/Context';
+import Cart from './containers/Cart';
 
 
 function App() {
@@ -21,15 +22,14 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  const populateProducts = async () => {
-    const data = await getProducts();
-    setProducts(data);
-    console.log("populateProducts data, called in App.js: ", data);
-  };
+  // const populateProducts = async () => {
+  //   const data = await getProducts();
+  //   setProducts(data);
+  // };
 
-  useEffect(() => {
-    populateProducts();
-  }, []);
+  // useEffect(() => {
+  //   populateProducts();
+  // }, []);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -63,15 +63,18 @@ function App() {
       favorite: !product.favorite,
     };
     await updateProduct(product.id, partial);
-    populateProducts();
+    // populateProducts();
   };
 
   return (
     <div className="App">
       <Router>
-        <SearchProvider>
+        <Provider>
           <Header countCartItems={cartItems.length} />
           <Switch>
+            <Route path="/cart">
+              <Cart />
+            </Route>
             <Route path="/featured">
               <Favorites />
             </Route>
@@ -96,7 +99,7 @@ function App() {
               <Home products={products} />
             </Route>
           </Switch>
-        </SearchProvider>
+        </Provider>
       </Router>
     </div>
   );
