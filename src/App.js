@@ -22,14 +22,14 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  const populateProducts = async () => {
-    const data = await getProducts();
-    setProducts(data);
-  };
+  // const populateProducts = async () => {
+  //   const data = await getProducts();
+  //   setProducts(data);
+  // };
 
-  useEffect(() => {
-    populateProducts();
-  }, []);
+  // useEffect(() => {
+  //   populateProducts();
+  // }, []);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -63,7 +63,7 @@ function App() {
       favorite: !product.favorite,
     };
     await updateProduct(product.id, partial);
-    populateProducts();
+    // populateProducts();
   };
 
   return (

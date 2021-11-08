@@ -88,7 +88,8 @@ const ProductCard = ({ product, toggleFavorite }) => {
 const ProductList = ({ cartItems, onAdd, onRemove }) => {
   const { search } = useContext(Context);
   const {
-    state: { products, cart }, populateProducts
+    state: { products, cart },
+    populateProducts,
   } = CartState();
 
   console.log("products in ProducList.jsx functional component: ", products);

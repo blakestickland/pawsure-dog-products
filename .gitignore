@@ -2,9 +2,12 @@
 
 # my added folders and files
 assets-for-storage
+/assets-for-storage
+MVP.md
 
 # dependencies
 /node_modules
+node_modules
 /.pnp
 .pnp.js
 
