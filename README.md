@@ -1,47 +1,33 @@
-<!-- Title of the project -->
-  # Pawsure Dog Products
-
-
-  [![MIT License](https://img.shields.io/badge/MIT-License-brightgreen)](https://choosealicense.com/licenses/)
-  
-  
-  <!-- Description of the project -->
-  eCommerce site where users can select from a variety of products and add them to a shopping cart. Users can also toggle a favorite button to keep track of their most liked items.
-  
-  ## Table of Contents
-  * [MVP](#mvp)
-  * [License](#license)
-  * [Contributing](#contributing)
-  * [Questions](#questions)
-
+# Project: React Ecommerce
 ## MVP:
-Required: 
-1. 2 pages:
-    * Home Page
-    * Grid of products
 
-2. Carousel of featured products
-3. Product Page (with id parameter) 
-    * Similar to a product page on another site, allows you to add to cart and select product variants.
+2 pages:
+* Home Page
+* Grid of products
 
-4. All products should be stored in firestore, you should store the following information:
-    * quantity
-    * variants (could be colors, sizes, etc)
-    * price per unit
-    * name
-    * image url
-    * favourited or not (boolean)
+* Carousel of featured products
+* Product Page (with id parameter)
+    Similar to a product page on another site, allows you to add to cart and select product variants
 
-5. All data should be stored in firestore and fetched by the frontend, there should be NO static product data in the react application
-  
-## License
-[MIT License](https://choosealicense.com/licenses/)
+All products should be stored in firestore, you should store the following information:
+* quantity
+* variants (could be colors, sizes, etc)
+* price per unit
+* name
+* image url
+* favourited or not (boolean)
 
-## Contributing
-f you would like to contribute, please fork the app, develop, and submit ideas via pull requests. Direct contact any suggestions too via GitHub or email.
+All data should be stored in firestore and fetched by the frontend, there should be NO static product data in the react application
 
-## Questions
-Please refer any questions via Github or my email address.
-Github username: [blakestickland](https://github.com/blakestickland)
+### Bonus:
+Using firestore and react create a cart system
+Create a cart page in your react app
+Add logic to prevent users from adding items to cart that are no longer in stock
+You will have to check the current cart and the product quantity
+Cart page should have the following:
+List of products in cart
+ability to change quantity of products in cart
+ability to remove entries from cart
 
-Email: blakestickland@gmail.com
+
+Make sure you site is scope to one category of products

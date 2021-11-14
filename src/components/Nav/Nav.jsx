@@ -5,6 +5,9 @@ import SearchBar from "../SearchBar";
     Navbar,
     Nav,
     NavDropdown,
+    Form,
+    FormControl,
+    Button,
   } from "react-bootstrap";
 
 
@@ -26,9 +29,9 @@ const Navigation = () => {
                 </NavDropdown.Item>
 
                 <NavDropdown.Divider />
-                <Link to="/favorites" className={styles.Link}>
-                    <NavDropdown.Item>Favorite Items</NavDropdown.Item>
-                </Link>
+                  <Link to="/favorites" className={styles.Link}>
+                <NavDropdown.Item>Favorite Items</NavDropdown.Item>
+                  </Link>
               </NavDropdown>
               <Nav.Link>Contact Us</Nav.Link>
               <Nav.Link>About Us</Nav.Link>
