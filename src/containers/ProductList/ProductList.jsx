@@ -43,9 +43,9 @@ const ProductCard = ({ product, onAdd, toggleFavorite }) => {
           {product.favorite ? "Favorited" : "Add to Favorites"}
           {/* Favorite */}
         </ToggleButton>
-        <Button variant="primary" size="md" onClick={() => onAdd(product)} className="w-100">
+        {/* <Button variant="primary" size="md" onClick={() => onAdd(product)} className="w-100">
           Add To Cart
-        </Button>
+        </Button> */}
       </Card.Body>
       {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
     </Card>
@@ -96,7 +96,7 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
                 </Col>
               ))}
           </Row>
-          <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+          {/* <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
         </div>
       </Container>
     );
