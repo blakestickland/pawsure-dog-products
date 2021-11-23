@@ -11,12 +11,17 @@ import Cart from "../../components/Cart";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 
+import { ProductsContext } from "../../context/ProductsContext";
+
 // const useQuery = () => {
 //   const location = useLocation();
 //   return new URLSearchParams(location.search);
 // };
 
-const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, populateProducts }) => {
+const ProductList = ({ cartItems, onAdd, onRemove }) => {
+
+  const { products, toggleFavorite } = useContext(ProductsContext);
+
   const { search } = useContext(SearchContext);
 
   const searchResults = products.filter(product => 
@@ -47,7 +52,7 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
             <ProductCard product={product} key={index} />
           ))} */}
           <Row xs={1} md={2} lg={3} className="mb-4">
-            {searchResults &&
+            {products && searchResults &&
               searchResults.map((product, index) => (
                 <Col key={index} className="d-flex justify-content-around">
                   <ProductCard
@@ -55,7 +60,6 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
                     key={product.id}
                     onAdd={onAdd}
                     toggleFavorite={toggleFavorite}
-                    populateProducts={populateProducts}
                   />
                 </Col>
               ))}

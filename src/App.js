@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getProducts, updateProduct } from "./services/products";
 import SearchProvider from './context/SearchContext';
+import { ProductsProvider } from './context/ProductsContext';
 
 
 function App() {
@@ -18,18 +19,18 @@ function App() {
   // Store the data in the state "products"
   // Pass the state down the tree for use
 
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  const populateProducts = async () => {
-    const data = await getProducts();
-    setProducts(data);
-    console.log("populateProducts data, called in App.js: ", data);
-  };
+  // const populateProducts = async () => {
+  //   const data = await getProducts();
+  //   setProducts(data);
+  //   console.log("populateProducts data, called in App.js: ", data);
+  // };
 
-  useEffect(() => {
-    populateProducts();
-  }, []);
+  // useEffect(() => {
+  //   populateProducts();
+  // }, []);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -57,18 +58,19 @@ function App() {
     }
   };
 
-  // Toggle Favorite
-  const toggleFavorite = async (product) => {
-    const partial = {
-      favorite: !product.favorite,
-    };
-    await updateProduct(product.id, partial);
-    populateProducts();
-  };
+  // // Toggle Favorite
+  // const toggleFavorite = async (product) => {
+  //   const partial = {
+  //     favorite: !product.favorite,
+  //   };
+  //   await updateProduct(product.id, partial);
+  //   // populateProducts();
+  // };
 
   return (
     <div className="App">
       <Router>
+        <ProductsProvider>
         <SearchProvider>
           <Header countCartItems={cartItems.length} />
           <Switch>
@@ -80,23 +82,25 @@ function App() {
                 cartItems={cartItems}
                 onAdd={onAdd}
                 onRemove={onRemove}
-                toggleFavorite={toggleFavorite}
+                // toggleFavorite={toggleFavorite}
               />
             </Route>
             <Route path="/products">
               <ProductList
-                products={products}
                 cartItems={cartItems}
                 onAdd={onAdd}
                 onRemove={onRemove}
-                toggleFavorite={toggleFavorite}
+                // toggleFavorite={toggleFavorite}
               />
             </Route>
             <Route path="/">
-              <Home products={products} />
+              <Home 
+                // products={products} 
+              />
             </Route>
           </Switch>
         </SearchProvider>
+        </ProductsProvider>
       </Router>
     </div>
   );

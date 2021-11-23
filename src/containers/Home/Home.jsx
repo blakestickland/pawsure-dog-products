@@ -1,12 +1,14 @@
 import styles from "./Home.module.scss";
 import BootstrapCarousel from "../../components/BootstrapCarousel";
+import { useContext } from "react";
+import { ProductsContext } from "../../context/ProductsContext";
 
-const Home = ({products}) => {
-          console.log(("products from Home page: ", products));
+const Home = () => {
+  const { products } = useContext(ProductsContext);
 
     return (
       <div className={styles}>
-        <BootstrapCarousel products={products}/>
+        <BootstrapCarousel products={products} />
       </div>
     );
 }
