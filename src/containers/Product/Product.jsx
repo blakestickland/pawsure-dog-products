@@ -26,12 +26,21 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
   });
   console.log("productContext: ", products, id, productContext);
 
-  const populateProduct = async () => {
+
+  useEffect(() => {
+    if (product) {
+      setSelectedProduct({ ...product, size: product.size[0], price: product.price[0] });
+      setPriceState(product.price[0].toFixed(2));
+    }
+  }, [product])
+
+
+  const populateProduct =  () => {
     // const data = await findProduct(id);
-    const data =  await productContext;
+    const data =   productContext;
     setProduct(data);
-    setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
-    setPriceState(data.price[0].toFixed(2));
+    // setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
+    // setPriceState(data.price[0].toFixed(2));
   };
 
   useEffect(() => {
@@ -80,15 +89,6 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
     event.preventDefault();
     setSizeState(event.target.value);
   };
-
-  // // Toggle Favorite
-  // const toggleFavorite = async (product) => {
-  //   const partial = {
-  //     favorite: !product.favorite,
-  //   };
-  //   await updateProduct(product.id, partial);
-  //   populateProduct();
-  // };
 
   return (
     <>
