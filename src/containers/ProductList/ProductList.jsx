@@ -5,54 +5,24 @@ import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import Card from "react-bootstrap/Card";
 
+import ProductCard from "../../components/ProductCard";
 import Cart from "../../components/Cart";
 
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
+
+import { ProductsContext } from "../../context/ProductsContext";
 
 // const useQuery = () => {
 //   const location = useLocation();
 //   return new URLSearchParams(location.search);
 // };
 
-const ProductCard = ({ product, onAdd, toggleFavorite }) => {
+const ProductList = ({ cartItems, onAdd, onRemove }) => {
 
-  return (
-    <Card className="text-center mb-3 rounded shadow-sm" style={{ width: "18rem" }}>
-      {/* <Card.Header>Featured</Card.Header> */}
-      <Card.Img variant="top" src={product.image}  style={{ height: "12rem" }} />
-      <Card.Body>
-        <Card.Title>{product.productName}</Card.Title>
-        <Card.Text>Size: {product.size[0]}</Card.Text>
-        <Card.Text>Price: ${product.price[0].toFixed(2)}</Card.Text>
-        <Card.Text>
-          <Link to={`/products/${product.id}`} style={{  textDecoration: "none" }}>More details &gt;</Link>
-        </Card.Text>
-        <ToggleButton
-          className="mb-2"
-          // id="toggle-check"
-          type="checkbox"
-          variant="outline-info"
-          checked={product.favorite}
-          onClick={() => toggleFavorite(product)}
-        >
-          {product.favorite ? "Favorited" : "Add to Favorites"}
-          {/* Favorite */}
-        </ToggleButton>
-        {/* <Button variant="primary" size="md" onClick={() => onAdd(product)} className="w-100">
-          Add To Cart
-        </Button> */}
-      </Card.Body>
-      {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
-    </Card>
-  );
-};
+  const { products, toggleFavorite } = useContext(ProductsContext);
 
-const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, populateProducts }) => {
   const { search } = useContext(SearchContext);
 
   const searchResults = products.filter(product => 
@@ -83,7 +53,7 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
             <ProductCard product={product} key={index} />
           ))} */}
           <Row xs={1} md={2} lg={3} className="mb-4">
-            {searchResults &&
+            {products && searchResults &&
               searchResults.map((product, index) => (
                 <Col key={index} className="d-flex justify-content-around">
                   <ProductCard
@@ -91,12 +61,11 @@ const ProductList = ({ products, cartItems, onAdd, onRemove, toggleFavorite, pop
                     key={product.id}
                     onAdd={onAdd}
                     toggleFavorite={toggleFavorite}
-                    populateProducts={populateProducts}
                   />
                 </Col>
               ))}
           </Row>
-          {/* <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
+          <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
         </div>
       </Container>
     );

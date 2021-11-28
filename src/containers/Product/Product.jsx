@@ -1,13 +1,15 @@
 import style from "./Product.module.scss";
-import { useParams } from "react-router"; // This might be "react-router-dom"
+import { useParams } from "react-router";
 import { findProduct, updateProduct } from "../../services/products";
 import Cart from "../../components/Cart";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import { Row, Col } from "react-bootstrap";
+
+import { ProductsContext } from "../../context/ProductsContext";
 
 const Product = ({ cartItems, onAdd, onRemove }) => {
   const { id } = useParams();
@@ -16,11 +18,16 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
   const [priceState, setPriceState] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // const product = products.find((product) => {
-  //     return product.id === parseInt(id);
-  // })
+  const { products, setProducts, toggleFavorite } = useContext(ProductsContext);
+
+
+  const productContext = products.find((product) => {
+      return product.id === id;
+  });
+  console.log("productContext: ", products, id, productContext);
+
   const populateProduct = async () => {
-    const data = await findProduct(id);
+    const data =  await productContext;
     setProduct(data);
     setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
     setPriceState(data.price[0].toFixed(2));
@@ -28,7 +35,7 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
 
   useEffect(() => {
     populateProduct();
-  }, [id]);
+  }, [id, products]);
 
   useEffect(() => {
     if (selectedProduct) {
@@ -71,15 +78,6 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
   const handleSizeStateSelection = (event) => {
     event.preventDefault();
     setSizeState(event.target.value);
-  };
-
-  // Toggle Favorite
-  const toggleFavorite = async (product) => {
-    const partial = {
-      favorite: !product.favorite,
-    };
-    await updateProduct(product.id, partial);
-    populateProduct();
   };
 
   return (
