@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/pawsure-dog-products/static/css/main.a3e9b316.chunk.css",
-    "main.js": "/pawsure-dog-products/static/js/main.969556f4.chunk.js",
-    "main.js.map": "/pawsure-dog-products/static/js/main.969556f4.chunk.js.map",
-    "runtime-main.js": "/pawsure-dog-products/static/js/runtime-main.cfe94aa7.js",
-    "runtime-main.js.map": "/pawsure-dog-products/static/js/runtime-main.cfe94aa7.js.map",
+    "main.css": "/pawsure-dog-products/static/css/main.607edea6.chunk.css",
+    "main.js": "/pawsure-dog-products/static/js/main.cbc1ff98.chunk.js",
+    "main.js.map": "/pawsure-dog-products/static/js/main.cbc1ff98.chunk.js.map",
+    "runtime-main.js": "/pawsure-dog-products/static/js/runtime-main.ee10b1c3.js",
+    "runtime-main.js.map": "/pawsure-dog-products/static/js/runtime-main.ee10b1c3.js.map",
     "static/css/2.67d44514.chunk.css": "/pawsure-dog-products/static/css/2.67d44514.chunk.css",
-    "static/js/2.da920770.chunk.js": "/pawsure-dog-products/static/js/2.da920770.chunk.js",
-    "static/js/2.da920770.chunk.js.map": "/pawsure-dog-products/static/js/2.da920770.chunk.js.map",
-    "static/js/3.973e41c1.chunk.js": "/pawsure-dog-products/static/js/3.973e41c1.chunk.js",
-    "static/js/3.973e41c1.chunk.js.map": "/pawsure-dog-products/static/js/3.973e41c1.chunk.js.map",
+    "static/js/2.5b66f3c2.chunk.js": "/pawsure-dog-products/static/js/2.5b66f3c2.chunk.js",
+    "static/js/2.5b66f3c2.chunk.js.map": "/pawsure-dog-products/static/js/2.5b66f3c2.chunk.js.map",
+    "static/js/3.c31a7a9f.chunk.js": "/pawsure-dog-products/static/js/3.c31a7a9f.chunk.js",
+    "static/js/3.c31a7a9f.chunk.js.map": "/pawsure-dog-products/static/js/3.c31a7a9f.chunk.js.map",
     "index.html": "/pawsure-dog-products/index.html",
     "static/css/2.67d44514.chunk.css.map": "/pawsure-dog-products/static/css/2.67d44514.chunk.css.map",
-    "static/css/main.a3e9b316.chunk.css.map": "/pawsure-dog-products/static/css/main.a3e9b316.chunk.css.map",
-    "static/js/2.da920770.chunk.js.LICENSE.txt": "/pawsure-dog-products/static/js/2.da920770.chunk.js.LICENSE.txt"
+    "static/css/main.607edea6.chunk.css.map": "/pawsure-dog-products/static/css/main.607edea6.chunk.css.map",
+    "static/js/2.5b66f3c2.chunk.js.LICENSE.txt": "/pawsure-dog-products/static/js/2.5b66f3c2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.cfe94aa7.js",
+    "static/js/runtime-main.ee10b1c3.js",
     "static/css/2.67d44514.chunk.css",
-    "static/js/2.da920770.chunk.js",
-    "static/css/main.a3e9b316.chunk.css",
-    "static/js/main.969556f4.chunk.js"
+    "static/js/2.5b66f3c2.chunk.js",
+    "static/css/main.607edea6.chunk.css",
+    "static/js/main.cbc1ff98.chunk.js"
   ]
 }
