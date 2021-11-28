@@ -1,5 +1,5 @@
 import style from "./Product.module.scss";
-import { useParams } from "react-router"; // This might be "react-router-dom"
+import { useParams } from "react-router";
 import { findProduct, updateProduct } from "../../services/products";
 import Cart from "../../components/Cart";
 import { useState, useEffect, useContext } from "react";
@@ -26,21 +26,11 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
   });
   console.log("productContext: ", products, id, productContext);
 
-
-  useEffect(() => {
-    if (product) {
-      setSelectedProduct({ ...product, size: product.size[0], price: product.price[0] });
-      setPriceState(product.price[0].toFixed(2));
-    }
-  }, [product])
-
-
-  const populateProduct =  () => {
-    // const data = await findProduct(id);
-    const data =   productContext;
+  const populateProduct = async () => {
+    const data =  await productContext;
     setProduct(data);
-    // setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
-    // setPriceState(data.price[0].toFixed(2));
+    setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
+    setPriceState(data.price[0].toFixed(2));
   };
 
   useEffect(() => {

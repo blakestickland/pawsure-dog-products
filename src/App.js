@@ -19,18 +19,11 @@ function App() {
   // Store the data in the state "products"
   // Pass the state down the tree for use
 
-  // const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  // const populateProducts = async () => {
-  //   const data = await getProducts();
-  //   setProducts(data);
-  //   console.log("populateProducts data, called in App.js: ", data);
-  // };
-
-  // useEffect(() => {
-  //   populateProducts();
-  // }, []);
+  useEffect(() => {
+    populateProducts();
+  }, []);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -57,15 +50,6 @@ function App() {
       );
     }
   };
-
-  // // Toggle Favorite
-  // const toggleFavorite = async (product) => {
-  //   const partial = {
-  //     favorite: !product.favorite,
-  //   };
-  //   await updateProduct(product.id, partial);
-  //   // populateProducts();
-  // };
 
   return (
     <div className="App">
