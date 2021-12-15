@@ -1,17 +1,14 @@
 import styles from "./Home.module.scss";
 import BootstrapCarousel from "../../components/BootstrapCarousel";
-import { CartState } from "../../context/Context";
 
-const Home = () => {
-  const {
-    state: { products },
-  } = CartState();
+const Home = ({products}) => {
+          console.log(("products from Home page: ", products));
 
-  return (
-    <div className={styles}>
-      <BootstrapCarousel products={products}/>
-    </div>
-  );
+    return (
+      <div className={styles}>
+        <BootstrapCarousel products={products}/>
+      </div>
+    );
 }
 
 export default Home
