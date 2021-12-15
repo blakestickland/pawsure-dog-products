@@ -3,7 +3,6 @@ import { useParams } from "react-router"; // This might be "react-router-dom"
 import { getCartItems, createCartItem, updateCartItem } from "../../services/cart";
 
 import { findProduct, updateProduct } from "../../services/products";
-import Cart from "../Cart";
 
 import { useState, useEffect } from "react";
 
