@@ -1,5 +1,6 @@
 import styles from "./ProductList.module.scss";
-import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
