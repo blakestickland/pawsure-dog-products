@@ -21,9 +21,9 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    populateProducts();
-  }, []);
+  // useEffect(() => {
+  //   populateProducts();
+  // }, []);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);

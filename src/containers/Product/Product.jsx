@@ -1,7 +1,8 @@
 import style from "./Product.module.scss";
 import { useParams } from "react-router"; // This might be "react-router-dom"
-import { getCartItems, createCartItem, updateCartItem } from "../../services/cart";
+// import { getCartItems, createCartItem, updateCartItem } from "../../services/cart";
 import { findProduct, updateProduct } from "../../services/products";
+import Cart from "../../components/Cart";
 import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
