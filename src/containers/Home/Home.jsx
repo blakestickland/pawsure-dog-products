@@ -1,12 +1,10 @@
 import styles from "./Home.module.scss";
 import BootstrapCarousel from "../../components/BootstrapCarousel";
 
-const Home = ({products}) => {
-          console.log(("products from Home page: ", products));
-
+const Home = () => {
     return (
       <div className={styles}>
-        <BootstrapCarousel products={products}/>
+        <BootstrapCarousel />
       </div>
     );
 }
