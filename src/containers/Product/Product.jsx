@@ -1,6 +1,5 @@
 import style from "./Product.module.scss";
-import { useParams } from "react-router";
-import { findProduct, updateProduct } from "../../services/products";
+import { useParams } from "react-router"; // This might be "react-router-dom"
 import Cart from "../../components/Cart";
 import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
@@ -18,19 +17,23 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
   const [priceState, setPriceState] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const { products, setProducts, toggleFavorite } = useContext(ProductsContext);
+  const { products, toggleFavorite } = useContext(ProductsContext);
 
 
   const productContext = products.find((product) => {
       return product.id === id;
   });
-  console.log("productContext: ", products, id, productContext);
-
+  
   const populateProduct = async () => {
     const data =  await productContext;
-    setProduct(data);
-    setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
-    setPriceState(data.price[0].toFixed(2));
+    if (!data) {
+      return <h2>Product with Id: {id} not found.</h2>;
+    } else {
+      console.log("productContext: ", products, id, productContext);
+      setProduct(data);
+      setSelectedProduct({ ...data, size: data.size[0], price: data.price[0] });
+      setPriceState(data.price[0].toFixed(2));
+    }
   };
 
   useEffect(() => {
