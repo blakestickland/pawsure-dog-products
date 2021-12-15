@@ -1,18 +1,14 @@
 import "bootstrap/dist/css/bootstrap.css";
 import Carousel from "react-bootstrap/Carousel";
 import styles from "./BootstrapCarousel.module.scss";
-import { ProductsContext } from "../../context/ProductsContext";
-import { useContext } from "react";
 
 
-const BootstrapCarousel = () => {
+const BootstrapCarousel = ({products}) => {
   // filter out the products for .featured=true
   // feed the filtered results into the Carousel.
   // need to wait for products to be returned from API call so, lazy evaluation used.
+  const featuredProducts = (products && products.filter((product) => product.featured));
   
-  const { products } = useContext(ProductsContext);
-
-  const featuredProducts = products && products.filter((product) => product.featured);
 
   return (
     <Carousel className={styles}>
