@@ -25,7 +25,6 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
   });
   
   const populateProduct = async () => {
-    // const data = await findProduct(id);
     const data =  await productContext;
     if (!data) {
       return <h2>Product with Id: {id} not found.</h2>;
@@ -83,15 +82,6 @@ const Product = ({ cartItems, onAdd, onRemove }) => {
     event.preventDefault();
     setSizeState(event.target.value);
   };
-
-  // // Toggle Favorite
-  // const toggleFavorite = async (product) => {
-  //   const partial = {
-  //     favorite: !product.favorite,
-  //   };
-  //   await updateProduct(product.id, partial);
-  //   populateProduct();
-  // };
 
   return (
     <>

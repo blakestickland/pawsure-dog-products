@@ -43,15 +43,6 @@ function App() {
     }
   };
 
-  // // Toggle Favorite
-  // const toggleFavorite = async (product) => {
-  //   const partial = {
-  //     favorite: !product.favorite,
-  //   };
-  //   await updateProduct(product.id, partial);
-  //   // populateProducts();
-  // };
-
   return (
     <div className="App">
       <Router>
