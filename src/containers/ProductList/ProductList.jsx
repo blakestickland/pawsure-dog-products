@@ -1,5 +1,5 @@
 import styles from "./ProductList.module.scss";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

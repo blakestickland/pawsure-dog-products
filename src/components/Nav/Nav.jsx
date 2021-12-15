@@ -4,10 +4,7 @@ import SearchBar from "../SearchBar";
   import {
     Navbar,
     Nav,
-    NavDropdown,
-    Form,
-    FormControl,
-    Button,
+    NavDropdown
   } from "react-bootstrap";
 
 

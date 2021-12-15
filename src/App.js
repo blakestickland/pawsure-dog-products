@@ -8,29 +8,14 @@ import Product from "./containers/Product";
 import Favorites from './containers/Favorites';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { getProducts, updateProduct } from "./services/products";
+import { useState } from "react";
+// import { getProducts, updateProduct } from "./services/products";
 import SearchProvider from './context/SearchContext';
 import { ProductsProvider } from './context/ProductsContext';
 
 
 function App() {
-  // When page is loaded, retrieve the Products from Firestore
-  // Store the data in the state "products"
-  // Pass the state down the tree for use
-
-  // const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-
-  // const populateProducts = async () => {
-  //   const data = await getProducts();
-  //   setProducts(data);
-  //   console.log("populateProducts data, called in App.js: ", data);
-  // };
-
-  // useEffect(() => {
-  //   populateProducts();
-  // }, []);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
